@@ -24,8 +24,10 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xFF004d40),
-        title: Text('Task Manager',
-        style: TextStyle(color: Colors.white),),
+        title: Text(
+          'Task Manager',
+          style: TextStyle(color: Colors.white),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
@@ -35,6 +37,12 @@ class HomeScreen extends StatelessWidget {
             return TaskCard(task: tasks[index]);
           },
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => {},
+        child: Icon(Icons.add),
+        backgroundColor: Color(0xFF004d40),
+        foregroundColor: Colors.white,
       ),
     );
   }
