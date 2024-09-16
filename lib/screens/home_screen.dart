@@ -1,25 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:task_manager/models/task.dart';
-import 'package:intl/intl.dart';
+import 'package:provider/provider.dart'; // Import the provider package
+import '../models/task.dart';
 import '../widgets/task_card.dart';
 import '../widgets/navigation_drawer.dart';
+import '../providers/task_provider.dart';
 
 class HomeScreen extends StatelessWidget {
-  final List<Task> tasks = [
-    Task(
-        id: '1',
-        title: 'Bet Matsdat',
-        description: 'betun bedenb adrgo matsdat yasfelgal',
-        dueDate: DateTime(2017, 12, 12),
-        isCompleted: true),
-    Task(
-        id: '2',
-        title: 'Bet Matsdat',
-        description: 'betun bedenb adrgo matsdat yasfelgal',
-        dueDate: DateTime(2017, 12, 12),
-        isCompleted: false)
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,10 +19,23 @@ class HomeScreen extends StatelessWidget {
       drawer: CustomDrawer(),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
-        child: ListView.builder(
-          itemCount: tasks.length,
-          itemBuilder: (context, index) {
-            return TaskCard(task: tasks[index]);
+        child: Consumer<TaskProvider>(
+          builder: (context, taskProvider, child) {
+            if (taskProvider.tasks.isEmpty) {
+              return Center(
+                child: Text(
+                  'There are no tasks',
+                  style: TextStyle(fontSize: 18, color: Colors.grey),
+                ),
+              );
+            } else {
+              return ListView.builder(
+                itemCount: taskProvider.tasks.length,
+                itemBuilder: (context, index) {
+                  return TaskCard(task: taskProvider.tasks[index]);
+                },
+              );
+            }
           },
         ),
       ),
