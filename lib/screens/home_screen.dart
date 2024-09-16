@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:task_manager/models/task.dart';
 import 'package:intl/intl.dart';
 import '../widgets/task_card.dart';
+import '../widgets/navigation_drawer.dart';
 
 class HomeScreen extends StatelessWidget {
   final List<Task> tasks = [
@@ -25,10 +26,11 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Color(0xFF004d40),
         title: Text(
-          'Task Manager',
+          'Home',
           style: TextStyle(color: Colors.white),
         ),
       ),
+      drawer: CustomDrawer(),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: ListView.builder(
@@ -39,7 +41,7 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => {},
+        onPressed: () => {Navigator.pushNamed(context, '/add')},
         child: Icon(Icons.add),
         backgroundColor: Color(0xFF004d40),
         foregroundColor: Colors.white,
